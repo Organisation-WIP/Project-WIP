@@ -1,11 +1,16 @@
-include("/home/flo/Nextcloud/Game-Engineering/Semester3/Computergrafik/Uebungen/FrameworkLinux/Common.pri")
+include(D:\\Dokumente\\Nextcloud\\Game-Engineering\\Semester3\\Computergrafik\\Uebungen\\Framework\\Common.pri)
 
 TARGET = Projekt-WIP
 SOURCES += \
     myscene.cpp \
     models/tower.cpp \
     models/enemyship.cpp \
-    models/playership.cpp
+    models/playership.cpp \
+    frameworkExtension/model.cpp \
+    frameworkExtension/bone.cpp \
+    frameworkExtension/animation.cpp \
+    frameworkExtension/keyframe.cpp \
+    frameworkExtension/keyframeboneinfo.cpp
 
 //HEADERS  +=
 
@@ -15,4 +20,9 @@ FORMS += \
 HEADERS += \
     models/tower.h \
     models/enemyship.h \
-    models/playership.h
+    models/playership.h \
+    frameworkExtension/model.h \
+    frameworkExtension/bone.h \
+    frameworkExtension/animation.h \
+    frameworkExtension/keyframe.h \
+    frameworkExtension/keyframeboneinfo.h
