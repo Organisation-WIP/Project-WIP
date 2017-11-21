@@ -6,6 +6,7 @@
 #include "keyboardtransformation.h"
 #include "controllablecamera.h"
 #include "color.h"
+#include "models/tower.h"
 
 #include "ui_dockwidget.h"
 
@@ -50,5 +51,26 @@ Node *initScene1()
     robo->setColorFingerRight(1,0.5,0.5);
 
     return(robo);*/
-    return new Node();
+
+    KeyboardTransformation* schieber = new KeyboardTransformation();
+    KeyboardTransformation* rotierer = new KeyboardTransformation();
+    rotierer->setRotKeys(KeyboardTransformation::NoKey,KeyboardTransformation::NoKey,
+                        'r', 'R',
+                        KeyboardTransformation::NoKey, KeyboardTransformation::NoKey);
+    rotierer->setRotspeed(1.5f);
+    schieber->setTransKeys('l','j',
+                          'I','K',
+                          'i','k');
+    schieber->setTransspeed(0.5f);
+
+    Tower* aTower = new Tower();
+
+    Node* rotiererNode = new Node(rotierer);
+    rotiererNode->addChild(aTower);
+    Node* schieberNode = new Node(schieber);
+    schieberNode->addChild(rotiererNode);
+
+    return schieberNode;
+    //return (aTower);
+    //return new Node();
 }
