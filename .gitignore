@@ -1,6 +1,8 @@
 
 *.user
 Projekt-WIP.pro*
+frameworkPath
 
 debug/*
 release/*
+build*

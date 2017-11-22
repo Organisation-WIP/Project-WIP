@@ -1,4 +1,4 @@
-include(D:\\Dokumente\\Nextcloud\\Game-Engineering\\Semester3\\Computergrafik\\Uebungen\\Framework\\Common.pri)
+include(frameworkPath)
 
 TARGET = Projekt-WIP
 SOURCES += \
