@@ -1,8 +1,11 @@
 #include "keyframeboneinfo.h"
 
-KeyframeBoneInfo::KeyframeBoneInfo(QString id)
+KeyframeBoneInfo::KeyframeBoneInfo(QString id, bool relative)
+    :relative(relative), boneID(id)
+{}
+bool KeyframeBoneInfo::isRelative()
 {
-    boneID = id;
+    return relative;
 }
 
 void KeyframeBoneInfo::setTransX(float x)
@@ -50,3 +53,24 @@ void KeyframeBoneInfo::setScalZ(float z)
     scalZ = true;
     scal[2] = z;
 }
+
+
+QString KeyframeBoneInfo::getID(){return boneID;}
+bool KeyframeBoneInfo::transX(){return transX;}
+float KeyframeBoneInfo::getTransX(){return trans[0];}
+bool KeyframeBoneInfo::transY(){return transY;}
+float KeyframeBoneInfo::getTransY(){return trans[1];}
+bool KeyframeBoneInfo::transZ(){return transZ;}
+float KeyframeBoneInfo::getTransZ(){return trans[2];}
+bool KeyframeBoneInfo::rotX(){return rotX;}
+float KeyframeBoneInfo::getRotX(){return rot[0];}
+bool KeyframeBoneInfo::rotY(){return rotY;}
+float KeyframeBoneInfo::getRotY(){return rot[1];}
+bool KeyframeBoneInfo::rotZ(){return rotZ;}
+float KeyframeBoneInfo::getRotZ(){return rot[2];}
+bool KeyframeBoneInfo::scalX(){return scalX;}
+float KeyframeBoneInfo::getScalX(){return scal[0];}
+bool KeyframeBoneInfo::scalY(){return scalY;}
+float KeyframeBoneInfo::getScalY(){return scal[1];}
+bool KeyframeBoneInfo::scalZ(){return scalZ;}
+float KeyframeBoneInfo::getScalZ(){return scal[2];}

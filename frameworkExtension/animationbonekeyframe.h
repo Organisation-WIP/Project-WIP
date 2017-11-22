@@ -1,13 +1,13 @@
-#ifndef KEYFRAMEBONEINFO_H
-#define KEYFRAMEBONEINFO_H
+#ifndef ANIMATIONBONEKEYFRAME_H
+#define ANIMATIONBONEKEYFRAME_H
 
 #include <qstring.h>
 
 
-class KeyframeBoneInfo
+class AnimationBoneKeyframe
 {
 public:
-    KeyframeBoneInfo(QString id, bool relative = false);
+    AnimationBoneKeyframe(QString id, bool relative = false);
     bool isRelative();
 
     void setTransX(float x);
@@ -51,4 +51,4 @@ private:
     float scal[3];
 };
 
-#endif // KEYFRAMEBONEINFO_H
+#endif // ANIMATIONBONEKEYFRAME_H

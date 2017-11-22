@@ -11,7 +11,9 @@ SOURCES += \
     frameworkExtension/bone.cpp \
     frameworkExtension/animation.cpp \
     frameworkExtension/keyframe.cpp \
-    frameworkExtension/keyframeboneinfo.cpp
+    frameworkExtension/keyframeboneinfo.cpp \
+    frameworkExtension/animationbonekeyframe.cpp \
+    frameworkExtension/animationbone.cpp
 
 FORMS += \
     dockwidget.ui
@@ -24,4 +26,6 @@ HEADERS += \
     frameworkExtension/bone.h \
     frameworkExtension/animation.h \
     frameworkExtension/keyframe.h \
-    frameworkExtension/keyframeboneinfo.h
+    frameworkExtension/keyframeboneinfo.h \
+    frameworkExtension/animationbonekeyframe.h \
+    frameworkExtension/animationbone.h
