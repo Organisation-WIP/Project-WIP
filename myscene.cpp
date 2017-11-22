@@ -63,10 +63,11 @@ Node *initScene1()
                           'i','k');
     schieber->setTransspeed(0.5f);
 
-    Tower* aTower = new Tower();
+    Tower* aTower = new Tower(5.0f);
 
     Node* rotiererNode = new Node(rotierer);
     rotiererNode->addChild(aTower);
+
     Node* schieberNode = new Node(schieber);
     schieberNode->addChild(rotiererNode);
 

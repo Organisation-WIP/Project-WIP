@@ -1,11 +1,7 @@
 #include "tower.h"
 
-Tower::Tower()
+Tower::Tower(float hoehe)
 {
-    TriangleMesh *m_BotMesh, *m_MidMesh, *m_TopMesh;
-    Drawable *m_Bot, *m_Mid, *m_Top;
-    Transformation *m_BotTrans, *m_MidTrans, *m_TopTrans;
-
     QString path(SRCDIR);
 
     m_BotMesh = new TriangleMesh(path+"/Object/towerbot.obj");
@@ -21,8 +17,8 @@ Tower::Tower()
     m_TopTrans = new Transformation;
 
     m_MidTrans->translate(0.0, 2.0, 0.0);
-    m_TopTrans->translate(0.0, 2.0, 0.0);
-
+    m_MidTrans->scale(1.0, hoehe, 1.0);
+    m_TopTrans->translate(0.0, 2.0f + hoehe, 0.0); //skalierungsfaktor hinzufügen
 
     Node* botTransNode = new Node(m_BotTrans);
     botTransNode->addChild(new Node(m_Bot));
@@ -33,7 +29,7 @@ Tower::Tower()
 
     Node* topTransNode = new Node(m_TopTrans);
     topTransNode->addChild(new Node(m_Top));
-    midTransNode->addChild(topTransNode);
+    botTransNode->addChild(topTransNode);
 
     this->addChild(botTransNode);
 }

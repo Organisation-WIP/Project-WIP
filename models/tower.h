@@ -2,15 +2,18 @@
 #define TOWER_H
 
 #include "node.h"
+#include "frameworkExtension/model.h"
 #include "drawable.h"
 #include "trianglemesh.h"
 #include "transformation.h"
 
-class Tower : public Node
+class Tower : public Model
 {
 public:
-    Tower();
+    Tower(float hoehe = 1.0f);
     ~Tower();
+
+    void setHoehe(float hoehe);
 
     void translate(float tx, float ty, float tz);
     void rotate(float angle, const QVector3D& axis);

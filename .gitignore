@@ -3,6 +3,8 @@
 Projekt-WIP.pro*
 frameworkPath*
 
-debug/*
-release/*
+debug*
+release*
 build*
+*.o
+*.exe
