@@ -21,23 +21,23 @@ public:
     void setScalZ(float z);
 
     QString getID();
-    bool transX();
+    bool isSetTransX();
     float getTransX();
-    bool transY();
+    bool isSetTransY();
     float getTransY();
-    bool transZ();
+    bool isSetTransZ();
     float getTransZ();
-    bool rotX();
+    bool isSetRotX();
     float getRotX();
-    bool rotY();
+    bool isSetRotY();
     float getRotY();
-    bool rotZ();
+    bool isSetRotZ();
     float getRotZ();
-    bool scalX();
+    bool isSetScalX();
     float getScalX();
-    bool scalY();
+    bool isSetScalY();
     float getScalY();
-    bool scalZ();
+    bool isSetScalZ();
     float getScalZ();
 
 private:

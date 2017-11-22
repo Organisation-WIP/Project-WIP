@@ -20,3 +20,34 @@ int AnimationBone::getKeyframeCount()
 {
     return keyframes.count();
 }
+
+void AnimationBone::prepareAnimationStart()
+{
+    finished = false;
+    startTime = std::clock();
+    keyframeStartTime = startTime;
+    currentKeyframe = keyframes.begin();
+    nextKeyframe = currentKeyframe + 1;
+}
+bool AnimationBone::isFinished()
+{
+    return finished;
+}
+
+void AnimationBone::applyAnimation(Bone *bone)
+{
+    clock_t currTime = std::clock();
+    if(currTime-startTime >= nextKeyframe.key())
+    {
+        keyframeStartTime += currentKeyframe.key();
+        currentKeyframe = nextKeyframe;
+        nextKeyframe++;
+        if(nextKeyframe == keyframes.end())
+        {
+            finished = true;
+        }
+    }
+
+    int trans[3] = {currentKeyframe.value()->get}
+    bone->translate();
+}

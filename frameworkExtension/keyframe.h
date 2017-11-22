@@ -3,23 +3,22 @@
 
 #include <qlist.h>
 #include <time.h>
-#include "keyframeboneinfo.h"
 
 
 class Keyframe
 {
 public:
-    Keyframe(c_time timeAfterLast);
-    void addBoneInfo(KeyframeBoneInfo* info);
+    Keyframe(c_time time, float value);
     void setNext(Keyframe* kf);
-    void setLast(Keyframe* kf);
     Keyframe* getNext();
-    Keyframe* getLast();
+    float getValue();
+
+    float getValue(clock_t currTime);
 
 private:
-    QList<KeyframeBoneInfo*> boneInfos;
-    c_time timeAfterLast;
-    Keyframe* next,last;
+    clock_t time;
+    Keyframe* next;
+    float value;
 };
 
 #endif // KEYFRAME_H
