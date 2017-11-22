@@ -5,6 +5,7 @@ Product Backlog: https://docs.google.com/spreadsheets/d/16HreuV-jazOCPrd63Kkj7x8
 
 
 ## SG-Framework
-The path to your local instance of the SGFramework has to be set in Projekt-WIP.pro in the first line:
+The path to your local instance of the SGFramework has to be set in a
+"frameworkPath":
 
-include( *PathToFramework* /common.pri)
+FRAMEWORK_PATH = *PathToFramework* /common.pri
