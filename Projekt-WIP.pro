@@ -1,4 +1,5 @@
 include(frameworkPath)
+include($$FRAMEWORK_PATH)
 
 TARGET = Projekt-WIP
 SOURCES += \
@@ -11,8 +12,6 @@ SOURCES += \
     frameworkExtension/animation.cpp \
     frameworkExtension/keyframe.cpp \
     frameworkExtension/keyframeboneinfo.cpp
-
-//HEADERS  +=
 
 FORMS += \
     dockwidget.ui
