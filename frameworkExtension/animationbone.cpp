@@ -1,10 +1,15 @@
 #include "animationbone.h"
-#include <QQuaternion>
 
 AnimationBone::AnimationBone(QString boneID)
     :boneID(boneID)
 {
     memset(transKeyframes, 0, 9*sizeof(int));
+}
+AnimationBone::~AnimationBone()
+{
+    for(int i=0;i<9;i++)
+        if(transKeyframes[i])
+            delete transKeyframes[i];
 }
 
 void AnimationBone::insertKeyframe(int transformation, Keyframe* keyframe)
@@ -12,7 +17,7 @@ void AnimationBone::insertKeyframe(int transformation, Keyframe* keyframe)
     if(transKeyframes[transformation])
         delete transKeyframes[transformation];
 
-    transKeyframes[transformation = keyframe;]
+    transKeyframes[transformation] = keyframe;
 }
 bool AnimationBone::deleteKeyframe(int transformation)
 {

@@ -1,7 +1,7 @@
 #include "keyframe.h"
 
 
-Keyframe::Keyframe(c_time time, float value)
+Keyframe::Keyframe(clock_t time, float value)
     :time(time), value(value), next(0)
 {}
 Keyframe::~Keyframe()
@@ -19,7 +19,7 @@ Keyframe* Keyframe::getNext()
     return next;
 }
 
-clock_t Kyframe::getTime()
+clock_t Keyframe::getTime()
 {
     return time;
 }

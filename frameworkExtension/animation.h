@@ -5,9 +5,9 @@
 #include <qlist.h>
 #include "idleobserver.h"
 #include "transformation.h"
-#include "animationbone.h"
 #include "model.h"
 
+class AnimationBone;
 
 class Animation : public IdleObserver
 {

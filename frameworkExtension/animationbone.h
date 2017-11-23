@@ -21,6 +21,7 @@ class AnimationBone
 {
 public:
     AnimationBone(QString boneID);
+    ~AnimationBone();
     void insertKeyframe(int transformation, Keyframe* keyframe);
     bool deleteKeyframe(int transformation);
     bool hasKeyframe(int transformation);

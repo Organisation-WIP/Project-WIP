@@ -8,7 +8,7 @@
 class Keyframe
 {
 public:
-    Keyframe(c_time time, float value);
+    Keyframe(clock_t time, float value);
     ~Keyframe();
     void setNext(Keyframe* kf);
     Keyframe* getNext();
