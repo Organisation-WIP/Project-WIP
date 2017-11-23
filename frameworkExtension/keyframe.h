@@ -8,19 +8,20 @@
 class Keyframe
 {
 public:
-    Keyframe(clock_t time, float value);
+    Keyframe(clock_t timestamp, float value);
     ~Keyframe();
     void setNext(Keyframe* kf);
+    void appendKeyframe(Keyframe* kf);
     Keyframe* getNext();
 
     clock_t getTime();
     float getValue(clock_t currTime);
-    float isFinished(clock_t currTime);
+    bool isFinished(clock_t currTime);
 
 private:
-    clock_t time;
-    Keyframe* next;
+    long timestamp;
     float value;
+    Keyframe* next;
 };
 
 #endif // KEYFRAME_H

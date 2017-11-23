@@ -7,6 +7,8 @@
 #include "controllablecamera.h"
 #include "color.h"
 #include "models/tower.h"
+#include "frameworkExtension/animation.h"
+#include "frameworkExtension/animationbone.h"
 
 #include "ui_dockwidget.h"
 
@@ -57,7 +59,7 @@ Node *initScene1()
     rotierer->setRotKeys(KeyboardTransformation::NoKey,KeyboardTransformation::NoKey,
                         'r', 'R',
                         KeyboardTransformation::NoKey, KeyboardTransformation::NoKey);
-    rotierer->setRotspeed(1.5f);
+    rotierer->setRotspeed(3.5f);
     schieber->setTransKeys('l','j',
                           'I','K',
                           'i','k');
@@ -70,6 +72,17 @@ Node *initScene1()
 
     Node* schieberNode = new Node(schieber);
     schieberNode->addChild(rotiererNode);
+
+    //Animation--------------------------
+    Animation* anim = new Animation();
+    AnimationBone* top = new AnimationBone("top");
+    Keyframe* start = new Keyframe(0,0);
+    start->setNext(new Keyframe(5000,359));
+    Keyframe* axis = new Keyframe(0,1);
+    top->setKeyframe(BONE_ROT_S, start);
+    top->setKeyframe(BONE_ROT_Y, axis);
+    anim->addAnimationBone(top);
+    anim->start(aTower,true);
 
     return schieberNode;
     //return (aTower);

@@ -1,8 +1,8 @@
 #include "keyframe.h"
 
 
-Keyframe::Keyframe(clock_t time, float value)
-    :time(time), value(value), next(0)
+Keyframe::Keyframe(clock_t timestamp, float value)
+    :timestamp(timestamp), value(value), next(0)
 {}
 Keyframe::~Keyframe()
 {
@@ -14,6 +14,13 @@ void Keyframe::setNext(Keyframe* kf)
 {
     next = kf;
 }
+void Keyframe::appendKeyframe(Keyframe *kf)
+{
+    if(next)
+        next->appendKeyframe(kf);
+    else
+        next = kf;
+}
 Keyframe* Keyframe::getNext()
 {
     return next;
@@ -21,26 +28,25 @@ Keyframe* Keyframe::getNext()
 
 clock_t Keyframe::getTime()
 {
-    return time;
+    return timestamp;
 }
 float Keyframe::getValue(clock_t currTime)
 {
-    if(currTime <= time)
+    if(currTime <= timestamp)
         return value;
-
     if(next)
     {
-        if(next->getTime() < time)
-            return value + ((next->value - value)* (currTime - time)/(next->time - time));      //erster + differenz*fortschritt_bis_naechster
+        if(currTime < next->getTime())
+            return value + ((next->value - value)* (currTime - timestamp)/(next->timestamp - timestamp));      //erster + differenz*fortschritt_bis_naechster
         else
             return next->getValue(currTime);
     }
     return value;
 }
 
-float Keyframe::isFinished(clock_t currTime)
+bool Keyframe::isFinished(clock_t currTime)
 {
-    if(currTime <= time)
+    if(currTime <= timestamp)
         return false;
 
     if(next)

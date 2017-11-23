@@ -22,7 +22,7 @@ public:
 private:
     TriangleMesh *m_BotMesh, *m_MidMesh, *m_TopMesh;
     Drawable *m_Bot, *m_Mid, *m_Top;
-    Transformation *m_BotTrans, *m_MidTrans, *m_TopTrans;
+    Bone *m_BotTrans, *m_MidTrans, *m_TopTrans;
 };
 
 #endif // TOWER_H

@@ -1,56 +1,74 @@
 #include "animationbone.h"
+#include <QQuaternion>
 
 AnimationBone::AnimationBone(QString boneID)
     :boneID(boneID)
 {
-    memset(transKeyframes, 0, 9*sizeof(int));
+    for(int i=0;i<10;i++)
+        transKeyframes[i] = 0;
 }
 AnimationBone::~AnimationBone()
 {
-    for(int i=0;i<9;i++)
+    for(int i=0;i<10;i++)
         if(transKeyframes[i])
             delete transKeyframes[i];
 }
 
-void AnimationBone::insertKeyframe(int transformation, Keyframe* keyframe)
+QString AnimationBone::getBoneID()
 {
-    if(transKeyframes[transformation])
-        delete transKeyframes[transformation];
-
-    transKeyframes[transformation] = keyframe;
+    return boneID;
 }
-bool AnimationBone::deleteKeyframe(int transformation)
+void AnimationBone::setKeyframe(int transformationType, Keyframe* keyframe)
 {
-    if(transKeyframes[transformation])
+    if(transKeyframes[transformationType])
+        delete transKeyframes[transformationType];
+
+    transKeyframes[transformationType] = keyframe;
+}
+bool AnimationBone::deleteKeyframe(int transformationType)
+{
+    if(transKeyframes[transformationType])
     {
-        delete transKeyframes[transformation];
-        transKeyframes[transformation] = 0;
+        delete transKeyframes[transformationType];
+        transKeyframes[transformationType] = 0;
         return true;
     }
     return false;
 }
-bool AnimationBone::hasKeyframe(int transformation)
+bool AnimationBone::hasKeyframe(int transformationType)
 {
-    return transKeyframes[transformation] != 0;
+    return transKeyframes[transformationType] != 0;
 }
 
 void AnimationBone::applyAnimation(Animation::AnimatedModel* aModel)
 {
     clock_t currTime = std::clock() - aModel->getStartTime();
     Bone* bone = aModel->getModel()->getBone(boneID);
-
-    float transformation[9];
-    bool finished = true;
-    for(int i=0;i<9;i++)
+    if(!bone)
     {
-        transformation[i] = transKeyframes[i]->getValue(currTime);
-        finished = finished && transKeyframes[i]->isFinished(currTime);
+        aModel->setFinished();
+        return;
     }
 
+    bool finished = true;
+    float transformation[10];
+    bone->getTranslation(transformation);
+    bone->getRotation(transformation+3);
+    bone->getScale(transformation+7);
+
+    for(int i=0;i<10;i++)
+    {
+        if(transKeyframes[i])
+        {
+            transformation[i] = transKeyframes[i]->getValue(currTime);
+            finished = finished && transKeyframes[i]->isFinished(currTime);
+        }
+    }
+
+    bone->resetTrafo();
     bone->translate(transformation[0],transformation[1],transformation[2]);
-    QQuaternion quat = QQuaternion::fromEulerAngles(transformation[3],transformation[4],transformation[5]);
-    bone->rotate(quat.scalar(), quat.vector());
-    bone->scale(transformation[6],transformation[7],transformation[8]);
+    bone->rotate(transformation[3],transformation[4],transformation[5],transformation[6]);
+    bone->scale(transformation[7],transformation[8],transformation[9]);
 
     if(finished)
         aModel->setFinished();

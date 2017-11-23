@@ -12,13 +12,13 @@ Tower::Tower(float hoehe)
     m_Mid = new Drawable(m_MidMesh);
     m_Top = new Drawable(m_TopMesh);
 
-    m_BotTrans = new Transformation;
-    m_MidTrans = new Transformation;
-    m_TopTrans = new Transformation;
+    m_BotTrans = new Bone("bot", this);
+    m_MidTrans = new Bone("mid", this);
+    m_TopTrans = new Bone("top", this);
 
     m_MidTrans->translate(0.0, 2.0, 0.0);
     m_MidTrans->scale(1.0, hoehe, 1.0);
-    m_TopTrans->translate(0.0, 2.0f + hoehe, 0.0); //skalierungsfaktor hinzufügen
+    m_TopTrans->translate(0.0, 2.0 + hoehe, 0.0);
 
     Node* botTransNode = new Node(m_BotTrans);
     botTransNode->addChild(new Node(m_Bot));

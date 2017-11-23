@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'dockwidget.ui'
 **
-** Created by: Qt User Interface Compiler version 5.5.1
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -74,8 +74,8 @@ public:
 
     void retranslateUi(QDockWidget *FPSWidget)
     {
-        FPSWidget->setWindowTitle(QApplication::translate("FPSWidget", "FPS", 0));
-        label->setText(QApplication::translate("FPSWidget", "Aktuelle FPS", 0));
+        FPSWidget->setWindowTitle(QApplication::translate("FPSWidget", "FPS", Q_NULLPTR));
+        label->setText(QApplication::translate("FPSWidget", "Aktuelle FPS", Q_NULLPTR));
     } // retranslateUi
 
 };

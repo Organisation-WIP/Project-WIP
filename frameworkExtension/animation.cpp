@@ -4,6 +4,25 @@
 Animation::Animation()
 {}
 
+bool Animation::addAnimationBone(AnimationBone *bone)
+{
+    QString boneID = bone->getBoneID();
+    for(QList<AnimationBone*>::Iterator i = animatedBones.begin(); i<animatedBones.end(); i++)
+        if((*i)->getBoneID() == boneID)
+            return false;
+    animatedBones.append(bone);
+    return true;
+}
+bool Animation::removeAnimationBone(QString boneID)
+{
+    for(QList<AnimationBone*>::Iterator i = animatedBones.begin(); i<animatedBones.end(); i++)
+        if((*i)->getBoneID() == boneID)
+        {
+            animatedBones.erase(i);
+            return true;
+        }
+    return false;
+}
 void Animation::start(Model* model, bool replay, bool reverse)
 {
     AnimatedModel* aModel = new AnimatedModel(model, replay, reverse);
@@ -15,9 +34,16 @@ void Animation::doIt()
     for(QList<Animation::AnimatedModel*>::Iterator i = animatedModels.begin(); i<animatedModels.end(); i++)
     {
         for(QList<AnimationBone*>::Iterator k = animatedBones.begin(); k<animatedBones.end(); k++)
+        {
             (*k)->applyAnimation(*i);
+        }
         if((*i)->isFinished())
-            animatedModels.erase(i);
+        {
+            if((*i)->isReplay())
+                (*i)->reset();
+            else
+                animatedModels.erase(i);
+        }
     }
 }
 
@@ -30,6 +56,11 @@ Animation::AnimatedModel::AnimatedModel(Model* model, bool replay, bool reverse)
     startTime = std::clock();
 }
 
+void Animation::AnimatedModel::reset()
+{
+    finished = false;
+    startTime = std::clock();
+}
 bool Animation::AnimatedModel::isFinished()
 {
     return finished;

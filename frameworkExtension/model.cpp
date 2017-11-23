@@ -7,5 +7,5 @@ Model::Model()
 
 Bone* Model::getBone(QString boneID)
 {
-    return rig.value(boneID);
+    return rig.value(boneID, 0);
 }

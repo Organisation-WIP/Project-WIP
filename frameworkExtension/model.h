@@ -15,6 +15,7 @@ public:
 
 private:
     QMap<QString, Bone*> rig;
+    friend Bone::Bone(QString id, Model* model);
 };
 
 #endif // MODEL_H

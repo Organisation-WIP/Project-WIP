@@ -16,6 +16,7 @@ public:
     {
     public:
         AnimatedModel(Model* model, bool replay=false, bool reverse=false);
+        void reset();
         void setFinished();
         bool isFinished();
         bool isReplay();
@@ -29,12 +30,13 @@ public:
     };
 
     Animation();
+    bool addAnimationBone(AnimationBone* bone);
+    bool removeAnimationBone(QString boneID);
     void start(Model* model, bool replay=false, bool reverse=false);
 
     virtual void doIt() override;
 
 private:
-    clock_t duration,startTime;
     QList<AnimationBone*> animatedBones;
     QList<AnimatedModel*> animatedModels;
 };
