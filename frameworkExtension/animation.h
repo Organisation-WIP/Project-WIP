@@ -12,16 +12,31 @@
 class Animation : public IdleObserver
 {
 public:
+    class AnimatedModel
+    {
+    public:
+        AnimatedModel(Model* model, bool replay=false, bool reverse=false);
+        void setFinished();
+        bool isFinished();
+        bool isReplay();
+        clock_t getStartTime();
+        Model* getModel();
+
+    private:
+        bool finished, replay, reverse;
+        clock_t startTime;
+        Model* m;
+    };
+
     Animation();
-    void setReplay(bool replay, bool reverse=false);
-    void start(Model* model);
+    void start(Model* model, bool replay=false, bool reverse=false);
 
     virtual void doIt() override;
 
 private:
-    bool replay,replayReverse;
     clock_t duration,startTime;
     QList<AnimationBone*> animatedBones;
+    QList<AnimatedModel*> animatedModels;
 };
 
 #endif // ANIMATION_H

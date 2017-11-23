@@ -11,7 +11,6 @@ SOURCES += \
     frameworkExtension/bone.cpp \
     frameworkExtension/animation.cpp \
     frameworkExtension/keyframe.cpp \
-    frameworkExtension/animationbonekeyframe.cpp \
     frameworkExtension/animationbone.cpp
 
 FORMS += \
@@ -25,5 +24,4 @@ HEADERS += \
     frameworkExtension/bone.h \
     frameworkExtension/animation.h \
     frameworkExtension/keyframe.h \
-    frameworkExtension/animationbonekeyframe.h \
     frameworkExtension/animationbone.h

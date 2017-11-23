@@ -1,27 +1,49 @@
 #include "keyframe.h"
 
-Keyframe::Keyframe(c_time timeAfterLast)
-    :next(0),last(0),timeAfterLast(timeAfterLast)
-{}
 
-Keyframe::addBoneInfo(KeyframeBoneInfo *info)
+Keyframe::Keyframe(c_time time, float value)
+    :time(time), value(value), next(0)
+{}
+Keyframe::~Keyframe()
 {
-    boneInfos.append(info);
+    if(next)
+        delete next;
 }
 
-void Keyframe::setNext(Keyframe *kf)
+void Keyframe::setNext(Keyframe* kf)
 {
     next = kf;
-}
-void Keyframe::setLast(Keyframe *kf)
-{
-    last = kf;
 }
 Keyframe* Keyframe::getNext()
 {
     return next;
 }
-Keyframe* Keyframe::getLast()
+
+clock_t Kyframe::getTime()
 {
-    return last;
+    return time;
+}
+float Keyframe::getValue(clock_t currTime)
+{
+    if(currTime <= time)
+        return value;
+
+    if(next)
+    {
+        if(next->getTime() < time)
+            return value + ((next->value - value)* (currTime - time)/(next->time - time));      //erster + differenz*fortschritt_bis_naechster
+        else
+            return next->getValue(currTime);
+    }
+    return value;
+}
+
+float Keyframe::isFinished(clock_t currTime)
+{
+    if(currTime <= time)
+        return false;
+
+    if(next)
+        return next->isFinished(currTime);
+    return true;
 }
