@@ -27,12 +27,16 @@ public:
     void setKeyframe(int transformationType, Keyframe* keyframe);
     bool deleteKeyframe(int transformationType);
     bool hasKeyframe(int transformationType);
+    clock_t getDuration();
 
     void applyAnimation(Animation::AnimatedModel* aModel);
 
 private:
     QString boneID;
     Keyframe* transKeyframes[10];
+    clock_t duration;
+
+    void updateDuration();
 };
 
 #endif // ANIMATIONBONE_H

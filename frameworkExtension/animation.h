@@ -20,11 +20,12 @@ public:
         void setFinished();
         bool isFinished();
         bool isReplay();
+        bool getReverseState();
         clock_t getStartTime();
         Model* getModel();
 
     private:
-        bool finished, replay, reverse;
+        bool finished, replay, reverse, reverseState;
         clock_t startTime;
         Model* m;
     };

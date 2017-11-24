@@ -2,7 +2,7 @@
 #include <QQuaternion>
 
 AnimationBone::AnimationBone(QString boneID)
-    :boneID(boneID)
+    :boneID(boneID), duration(0)
 {
     for(int i=0;i<10;i++)
         transKeyframes[i] = 0;
@@ -24,6 +24,7 @@ void AnimationBone::setKeyframe(int transformationType, Keyframe* keyframe)
         delete transKeyframes[transformationType];
 
     transKeyframes[transformationType] = keyframe;
+    updateDuration();
 }
 bool AnimationBone::deleteKeyframe(int transformationType)
 {
@@ -31,6 +32,7 @@ bool AnimationBone::deleteKeyframe(int transformationType)
     {
         delete transKeyframes[transformationType];
         transKeyframes[transformationType] = 0;
+        updateDuration();
         return true;
     }
     return false;
@@ -39,10 +41,18 @@ bool AnimationBone::hasKeyframe(int transformationType)
 {
     return transKeyframes[transformationType] != 0;
 }
+clock_t AnimationBone::getDuration()
+{
+    return duration;
+}
 
 void AnimationBone::applyAnimation(Animation::AnimatedModel* aModel)
 {
+    bool reverseState = aModel->getReverseState();
     clock_t currTime = std::clock() - aModel->getStartTime();
+    if(reverseState)
+        currTime = duration-currTime;
+
     Bone* bone = aModel->getModel()->getBone(boneID);
     if(!bone)
     {
@@ -61,9 +71,12 @@ void AnimationBone::applyAnimation(Animation::AnimatedModel* aModel)
         if(transKeyframes[i])
         {
             transformation[i] = transKeyframes[i]->getValue(currTime);
-            finished = finished && transKeyframes[i]->isFinished(currTime);
+            if(!reverseState)
+                finished = finished && transKeyframes[i]->isFinished(currTime);
         }
     }
+    if(reverseState)
+        finished = currTime <= 0;
 
     bone->resetTrafo();
     bone->translate(transformation[0],transformation[1],transformation[2]);
@@ -72,4 +85,19 @@ void AnimationBone::applyAnimation(Animation::AnimatedModel* aModel)
 
     if(finished)
         aModel->setFinished();
+}
+
+
+void AnimationBone::updateDuration()
+{
+    duration = 0;
+    for(int i=0;i<10;i++)
+    {
+        if(transKeyframes[i])
+        {
+            clock_t tempDuration = transKeyframes[i]->getDuration();
+            if(tempDuration > duration)
+                duration = tempDuration;
+        }
+    }
 }

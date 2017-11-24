@@ -53,3 +53,10 @@ bool Keyframe::isFinished(clock_t currTime)
         return next->isFinished(currTime);
     return true;
 }
+
+clock_t Keyframe::getDuration()
+{
+    if(next)
+        return next->getDuration();
+    return timestamp;
+}

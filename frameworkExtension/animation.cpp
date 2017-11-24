@@ -1,5 +1,6 @@
 #include "animation.h"
 #include "animationbone.h"
+#include <iostream>
 
 Animation::Animation()
 {}
@@ -35,7 +36,9 @@ void Animation::doIt()
     {
         for(QList<AnimationBone*>::Iterator k = animatedBones.begin(); k<animatedBones.end(); k++)
         {
+//std::cout << "Test1";
             (*k)->applyAnimation(*i);
+//std::cout << "Test2";
         }
         if((*i)->isFinished())
         {
@@ -51,7 +54,7 @@ void Animation::doIt()
 
 
 Animation::AnimatedModel::AnimatedModel(Model* model, bool replay, bool reverse)
-    :m(model), finished(false), replay(replay), reverse(reverse)
+    :m(model), finished(false), replay(replay), reverse(reverse), reverseState(false)
 {
     startTime = std::clock();
 }
@@ -60,6 +63,8 @@ void Animation::AnimatedModel::reset()
 {
     finished = false;
     startTime = std::clock();
+    if(reverse)
+        reverseState = !reverseState;
 }
 bool Animation::AnimatedModel::isFinished()
 {
@@ -73,6 +78,10 @@ void Animation::AnimatedModel::setFinished()
 bool Animation::AnimatedModel::isReplay()
 {
     return replay;
+}
+bool Animation::AnimatedModel::getReverseState()
+{
+    return reverseState;
 }
 clock_t Animation::AnimatedModel::getStartTime()
 {

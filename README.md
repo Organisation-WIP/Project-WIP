@@ -5,7 +5,6 @@ Product Backlog: https://docs.google.com/spreadsheets/d/16HreuV-jazOCPrd63Kkj7x8
 
 
 ## SG-Framework
-The path to your local instance of the SGFramework has to be set in a
-"frameworkPath":
+The path to your local instance of the SGFramework has to be set in a file "frameworkPath":
 
 FRAMEWORK_PATH = *PathToFramework* /common.pri

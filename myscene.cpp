@@ -9,7 +9,6 @@
 #include "models/tower.h"
 #include "frameworkExtension/animation.h"
 #include "frameworkExtension/animationbone.h"
-
 #include "ui_dockwidget.h"
 
 Node *initScene1();
@@ -82,7 +81,7 @@ Node *initScene1()
     top->setKeyframe(BONE_ROT_S, start);
     top->setKeyframe(BONE_ROT_Y, axis);
     anim->addAnimationBone(top);
-    anim->start(aTower,true);
+    anim->start(aTower,true,true);
 
     return schieberNode;
     //return (aTower);

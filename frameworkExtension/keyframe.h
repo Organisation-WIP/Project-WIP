@@ -17,9 +17,10 @@ public:
     clock_t getTime();
     float getValue(clock_t currTime);
     bool isFinished(clock_t currTime);
+    clock_t getDuration();
 
 private:
-    long timestamp;
+    clock_t timestamp;
     float value;
     Keyframe* next;
 };
