@@ -2,61 +2,41 @@
 
 
 Keyframe::Keyframe(clock_t timestamp, float value)
-    :timestamp(timestamp), value(value), next(0)
-{}
+    :value(value)
+{
+    this->timestamp = (timestamp<0 ? 0 : timestamp);
+    InterpolationMethod* interp = Interpolation::getLinearInterpolation();
+    leftInterp = interp;
+    rightInterp = interp;
+}
 Keyframe::~Keyframe()
-{
-    if(next)
-        delete next;
-}
+{}
 
-void Keyframe::setNext(Keyframe* kf)
+void Keyframe::setInterpolation(InterpolationMethod* interp)
 {
-    next = kf;
+    if(interp == 0)
+        interp = Interpolation::getLinearInterpolation();
+    leftInterp = interp;
+    rightInterp = interp;
 }
-void Keyframe::appendKeyframe(Keyframe *kf)
+void Keyframe::setInterpolationLeft(InterpolationMethod* interp)
 {
-    if(next)
-        next->appendKeyframe(kf);
-    else
-        next = kf;
+    if(interp == 0)
+        interp = Interpolation::getLinearInterpolation();
+    leftInterp = interp;
 }
-Keyframe* Keyframe::getNext()
+void Keyframe::setInterpolationRight(InterpolationMethod* interp)
 {
-    return next;
+    if(interp == 0)
+        interp = Interpolation::getLinearInterpolation();
+    rightInterp = interp;
 }
 
 clock_t Keyframe::getTime()
 {
     return timestamp;
 }
-float Keyframe::getValue(clock_t currTime)
+float Keyframe::getValue()
 {
-    if(currTime <= timestamp)
-        return value;
-    if(next)
-    {
-        if(currTime < next->getTime())
-            return value + ((next->value - value)* (currTime - timestamp)/(next->timestamp - timestamp));      //erster + differenz*fortschritt_bis_naechster
-        else
-            return next->getValue(currTime);
-    }
     return value;
-}
-
-bool Keyframe::isFinished(clock_t currTime)
-{
-    if(currTime <= timestamp)
-        return false;
-
-    if(next)
-        return next->isFinished(currTime);
-    return true;
-}
-
-clock_t Keyframe::getDuration()
-{
-    if(next)
-        return next->getDuration();
-    return timestamp;
 }

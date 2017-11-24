@@ -5,41 +5,41 @@ AnimationBone::AnimationBone(QString boneID)
     :boneID(boneID), duration(0)
 {
     for(int i=0;i<10;i++)
-        transKeyframes[i] = 0;
+        transformationGraphs[i] = 0;
 }
 AnimationBone::~AnimationBone()
 {
     for(int i=0;i<10;i++)
-        if(transKeyframes[i])
-            delete transKeyframes[i];
+        if(transformationGraphs[i])
+            delete transformationGraphs[i];
 }
 
 QString AnimationBone::getBoneID()
 {
     return boneID;
 }
-void AnimationBone::setKeyframe(int transformationType, Keyframe* keyframe)
+void AnimationBone::setGraph(int transformationType, Graph* graph)
 {
-    if(transKeyframes[transformationType])
-        delete transKeyframes[transformationType];
+    if(transformationGraphs[transformationType])
+        delete transformationGraphs[transformationType];
 
-    transKeyframes[transformationType] = keyframe;
+    transformationGraphs[transformationType] = graph;
     updateDuration();
 }
-bool AnimationBone::deleteKeyframe(int transformationType)
+bool AnimationBone::deleteGraph(int transformationType)
 {
-    if(transKeyframes[transformationType])
+    if(transformationGraphs[transformationType])
     {
-        delete transKeyframes[transformationType];
-        transKeyframes[transformationType] = 0;
+        delete transformationGraphs[transformationType];
+        transformationGraphs[transformationType] = 0;
         updateDuration();
         return true;
     }
     return false;
 }
-bool AnimationBone::hasKeyframe(int transformationType)
+bool AnimationBone::hasGraph(int transformationType)
 {
-    return transKeyframes[transformationType] != 0;
+    return transformationGraphs[transformationType] != 0;
 }
 clock_t AnimationBone::getDuration()
 {
@@ -68,11 +68,11 @@ void AnimationBone::applyAnimation(Animation::AnimatedModel* aModel)
 
     for(int i=0;i<10;i++)
     {
-        if(transKeyframes[i])
+        if(transformationGraphs[i])
         {
-            transformation[i] = transKeyframes[i]->getValue(currTime);
+            transformation[i] = transformationGraphs[i]->getValue(currTime);
             if(!reverseState)
-                finished = finished && transKeyframes[i]->isFinished(currTime);
+                finished = finished && transformationGraphs[i]->isFinished(currTime);
         }
     }
     if(reverseState)
@@ -93,9 +93,9 @@ void AnimationBone::updateDuration()
     duration = 0;
     for(int i=0;i<10;i++)
     {
-        if(transKeyframes[i])
+        if(transformationGraphs[i])
         {
-            clock_t tempDuration = transKeyframes[i]->getDuration();
+            clock_t tempDuration = transformationGraphs[i]->getDuration();
             if(tempDuration > duration)
                 duration = tempDuration;
         }

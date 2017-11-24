@@ -1,0 +1,14 @@
+INPUT(
+./debug\myscene.o
+./debug\tower.o
+./debug\enemyship.o
+./debug\playership.o
+./debug\model.o
+./debug\bone.o
+./debug\animation.o
+./debug\keyframe.o
+./debug\animationbone.o
+./debug\graph.o
+./debug\linearinterpolation.o
+./debug\interpolation.o
+);

@@ -75,11 +75,13 @@ Node *initScene1()
     //Animation--------------------------
     Animation* anim = new Animation();
     AnimationBone* top = new AnimationBone("top");
-    Keyframe* start = new Keyframe(0,0);
-    start->setNext(new Keyframe(5000,359));
-    Keyframe* axis = new Keyframe(0,1);
-    top->setKeyframe(BONE_ROT_S, start);
-    top->setKeyframe(BONE_ROT_Y, axis);
+    Graph* gr = new Graph();
+    gr->insertKeyframe(new Keyframe(0,0));
+    gr->insertKeyframe(new Keyframe(5000,359));
+    Graph* axis = new Graph();
+    axis->insertKeyframe(new Keyframe(0,1));
+    top->setGraph(BONE_ROT_S, gr);
+    top->setGraph(BONE_ROT_Y, axis);
     anim->addAnimationBone(top);
     anim->start(aTower,true,true);
 

@@ -3,26 +3,28 @@
 
 #include <qlist.h>
 #include <time.h>
+#include "interpolation.h"
 
 
 class Keyframe
 {
+    friend float Interpolation::interpolate(Keyframe *k1, Keyframe *k2, float progress);
 public:
     Keyframe(clock_t timestamp, float value);
     ~Keyframe();
-    void setNext(Keyframe* kf);
-    void appendKeyframe(Keyframe* kf);
-    Keyframe* getNext();
+
+    void setInterpolation(InterpolationMethod* interp);
+    void setInterpolationLeft(InterpolationMethod* interp);
+    void setInterpolationRight(InterpolationMethod* interp);
 
     clock_t getTime();
-    float getValue(clock_t currTime);
-    bool isFinished(clock_t currTime);
-    clock_t getDuration();
+    float getValue();
 
 private:
     clock_t timestamp;
     float value;
-    Keyframe* next;
+    InterpolationMethod* leftInterp;
+    InterpolationMethod* rightInterp;
 };
 
 #endif // KEYFRAME_H

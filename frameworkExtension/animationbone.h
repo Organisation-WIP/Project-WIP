@@ -5,7 +5,7 @@
 #include <qmap.h>
 #include <time.h>
 #include "animation.h"
-#include "keyframe.h"
+#include "graph.h"
 
 #define BONE_TRANS_X 0
 #define BONE_TRANS_Y 1
@@ -24,16 +24,16 @@ public:
     AnimationBone(QString boneID);
     ~AnimationBone();
     QString getBoneID();
-    void setKeyframe(int transformationType, Keyframe* keyframe);
-    bool deleteKeyframe(int transformationType);
-    bool hasKeyframe(int transformationType);
+    void setGraph(int transformationType, Graph* graph);
+    bool deleteGraph(int transformationType);
+    bool hasGraph(int transformationType);
     clock_t getDuration();
 
     void applyAnimation(Animation::AnimatedModel* aModel);
 
 private:
     QString boneID;
-    Keyframe* transKeyframes[10];
+    Graph* transformationGraphs[10];
     clock_t duration;
 
     void updateDuration();
