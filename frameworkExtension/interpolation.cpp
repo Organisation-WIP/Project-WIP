@@ -1,12 +1,19 @@
 #include "interpolation.h"
 #include "keyframe.h"
 
+LinearInterpolation Interpolation::linear;
+SineInterpolation Interpolation::sine;
+
 Interpolation::Interpolation()
 {}
 
 InterpolationMethod* Interpolation::getLinearInterpolation()
 {
-    return &linear;
+    return &Interpolation::linear;
+}
+InterpolationMethod* Interpolation::getSineInterpolation()
+{
+    return &Interpolation::sine;
 }
 
 float Interpolation::interpolate(Keyframe *k1, Keyframe *k2, float progress)
@@ -18,7 +25,10 @@ float Interpolation::interpolate(Keyframe *k1, Keyframe *k2, float progress)
 
     float val1 = k1->getValue();
     float val2 = k2->getValue();
+    InterpolationMethod* interp;
     if(progress < 0.5)
-        return k1->rightInterp->getValue(val1, val1 + (val2-val1)/2, progress*2);
-    return k2->leftInterp->getValue(val1 + (val2-val1)/2, val2, (progress-0.5)*2);
+        interp = k1->rightInterp;
+    else
+        interp = k2->leftInterp;
+    return interp->getValue(val1, val2, progress);
 }

@@ -76,8 +76,8 @@ Node *initScene1()
     Animation* anim = new Animation();
     AnimationBone* top = new AnimationBone("top");
     Graph* gr = new Graph();
-    gr->insertKeyframe(new Keyframe(0,0));
-    gr->insertKeyframe(new Keyframe(5000,359));
+    gr->insertKeyframe(new Keyframe(0,0, Interpolation::getSineInterpolation()));
+    gr->insertKeyframe(new Keyframe(5000,359, Interpolation::getSineInterpolation()));
     Graph* axis = new Graph();
     axis->insertKeyframe(new Keyframe(0,1));
     top->setGraph(BONE_ROT_S, gr);

@@ -1,6 +1,5 @@
 #include "animation.h"
 #include "animationbone.h"
-#include <iostream>
 
 Animation::Animation()
 {}
@@ -36,9 +35,7 @@ void Animation::doIt()
     {
         for(QList<AnimationBone*>::Iterator k = animatedBones.begin(); k<animatedBones.end(); k++)
         {
-//std::cout << "Test1";
             (*k)->applyAnimation(*i);
-//std::cout << "Test2";
         }
         if((*i)->isFinished())
         {

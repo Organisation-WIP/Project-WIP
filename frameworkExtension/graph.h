@@ -18,6 +18,7 @@ public:
     QMap<clock_t, Keyframe*> getKeyframes();
 
     float getValue(clock_t currTime);
+    bool isFinished(clock_t currTime);
 
 private:
     QMap<clock_t, Keyframe*> keyframes;

@@ -11,4 +11,5 @@ INPUT(
 ./debug\graph.o
 ./debug\linearinterpolation.o
 ./debug\interpolation.o
+./debug\sineinterpolation.o
 );

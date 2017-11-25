@@ -1,6 +1,5 @@
 #include "animationbone.h"
 #include <QQuaternion>
-
 AnimationBone::AnimationBone(QString boneID)
     :boneID(boneID), duration(0)
 {

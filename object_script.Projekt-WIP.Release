@@ -11,4 +11,5 @@ INPUT(
 ./release\graph.o
 ./release\linearinterpolation.o
 ./release\interpolation.o
+./release\sineinterpolation.o
 );

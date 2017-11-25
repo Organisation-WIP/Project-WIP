@@ -14,7 +14,8 @@ SOURCES += \
     frameworkExtension/animationbone.cpp \
     frameworkExtension/graph.cpp \
     frameworkExtension/interpolation/linearinterpolation.cpp \
-    frameworkExtension/interpolation.cpp
+    frameworkExtension/interpolation.cpp \
+    frameworkExtension/interpolation/sineinterpolation.cpp
 
 FORMS += \
     dockwidget.ui
@@ -31,4 +32,5 @@ HEADERS += \
     frameworkExtension/graph.h \
     frameworkExtension/interpolation/interpolationmethod.h \
     frameworkExtension/interpolation/linearinterpolation.h \
-    frameworkExtension/interpolation.h
+    frameworkExtension/interpolation.h \
+    frameworkExtension/interpolation/sineinterpolation.h

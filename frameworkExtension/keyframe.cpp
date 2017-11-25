@@ -1,11 +1,12 @@
 #include "keyframe.h"
 
 
-Keyframe::Keyframe(clock_t timestamp, float value)
+Keyframe::Keyframe(clock_t timestamp, float value, InterpolationMethod* interp)
     :value(value)
 {
     this->timestamp = (timestamp<0 ? 0 : timestamp);
-    InterpolationMethod* interp = Interpolation::getLinearInterpolation();
+    if(!interp)
+        interp = Interpolation::getLinearInterpolation();
     leftInterp = interp;
     rightInterp = interp;
 }

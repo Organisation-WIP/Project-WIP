@@ -5,7 +5,8 @@ Graph::Graph()
 {}
 Graph::~Graph()
 {
-    for(QMap<clock_t, Keyframe*>::iterator i=keyframes.begin(); i<keyframes.end(); i++)
+    QMap<clock_t, Keyframe*>::iterator end = keyframes.end();
+    for(QMap<clock_t, Keyframe*>::iterator i=keyframes.begin(); i!=end; i++)
         delete i.value();
 }
 
@@ -35,20 +36,27 @@ QMap<clock_t, Keyframe*> Graph::getKeyframes()
 
 float Graph::getValue(clock_t currTime)
 {
-    for(QMap<clock_t, Keyframe*>::iterator i=keyframes.begin(); i<keyframes.end(); i++)
+    QMap<clock_t, Keyframe*>::iterator end = keyframes.end();
+    for(QMap<clock_t, Keyframe*>::iterator i=keyframes.begin(); i!=end; i++)
     {
+        clock_t time1 = i.key();
+        if(currTime <= time1)
+            return i.value()->getValue();
 
+        QMap<clock_t, Keyframe*>::iterator next = i+1;
+        if(next != end)
+        {
+            clock_t time2 = next.key();
+            if(currTime < time2)
+                return Interpolation::interpolate(i.value(), next.value(), ((float)currTime-time1)/(time2-time1));
+            continue;
+        }
+        return i.value()->getValue();
     }
-    /*if(currTime <= timestamp)
-        return value;
-    if(next)
-    {
-        if(currTime < next->getTime())
-            return value + ((next->value - value)* (currTime - timestamp)/(next->timestamp - timestamp));      //erster + differenz*fortschritt_bis_naechster
-        else
-            return next->getValue(currTime);
-    }
-    return value;*/
+}
+bool Graph::isFinished(clock_t currTime)
+{
+    return currTime >= duration;
 }
 
 

@@ -10,7 +10,7 @@ class Keyframe
 {
     friend float Interpolation::interpolate(Keyframe *k1, Keyframe *k2, float progress);
 public:
-    Keyframe(clock_t timestamp, float value);
+    Keyframe(clock_t timestamp, float value, InterpolationMethod* interp=0);
     ~Keyframe();
 
     void setInterpolation(InterpolationMethod* interp);
