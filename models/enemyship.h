@@ -8,10 +8,10 @@
 #include "transformation.h"
 
 
-class EnemyShip : public Node
+class EnemyShip : public Model
 {
-    Tower();
-    ~Tower();
+    EnemyShip();
+    ~EnemyShip();
 
     void translate(float tx, float ty, float tz);
     void rotate(float angle, const QVector3D& axis);

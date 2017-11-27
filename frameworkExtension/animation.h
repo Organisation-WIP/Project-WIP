@@ -4,7 +4,7 @@
 #include <time.h>
 #include <qlist.h>
 #include "idleobserver.h"
-#include "transformation.h"
+//#include "transformation.h"
 #include "model.h"
 
 class AnimationBone;

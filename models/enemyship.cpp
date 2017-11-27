@@ -2,12 +2,15 @@
 
 EnemyShip::EnemyShip()
 {
-  QString patch(SRCDIR);
+  QString path(SRCDIR);
+
   m_ShipMesh = new TriangleMesh(path+"/Object/enemyship.obj");
   m_ShipDraw = new Drawable(m_ShipMesh);
   m_ShipBone = new Bone("ship", this);
+
   Node* TransNode = new Node(m_ShipBone);
   TransNode->addChild(new Node(m_ShipDraw));
+
   this->addChild(TransNode);
 }
 
