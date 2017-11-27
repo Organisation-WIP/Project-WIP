@@ -20,18 +20,15 @@ Tower::Tower(float hoehe)
     m_MidTrans->scale(1.0, hoehe, 1.0);
     m_TopTrans->translate(0.0, 2.0 + hoehe, 0.0);
 
-    Node* botTransNode = new Node(m_BotTrans);
-    botTransNode->addChild(new Node(m_Bot));
+    m_BotTrans->addChild(new Node(m_Bot));
 
-    Node* midTransNode = new Node(m_MidTrans);
-    midTransNode->addChild(new Node(m_Mid));
-    botTransNode->addChild(midTransNode);
+    m_MidTrans->addChild(new Node(m_Mid));
+    m_BotTrans->addChild(m_MidTrans);
 
-    Node* topTransNode = new Node(m_TopTrans);
-    topTransNode->addChild(new Node(m_Top));
-    botTransNode->addChild(topTransNode);
+    m_TopTrans->addChild(new Node(m_Top));
+    m_BotTrans->addChild(m_TopTrans);
 
-    this->addChild(botTransNode);
+    this->addChild(m_BotTrans);
 }
 
 Tower::~Tower()

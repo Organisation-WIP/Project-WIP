@@ -1,14 +1,16 @@
 #ifndef BONE_H
 #define BONE_H
 
+#include "node.h"
 #include "transformation.h"
 
 class Model;
 
-class Bone : public Transformation
+class Bone : public Node
 {
 public:
     Bone(QString id, Model* model);
+    virtual ~Bone();
 
     void translate(float tx, float ty, float tz);
     void rotate(float angle, const QVector3D& axis);
@@ -22,6 +24,7 @@ public:
 
 private:
     QString boneID;
+    Transformation* transformation;
     float trans[3];
     float rot[4];
     float scal[3];

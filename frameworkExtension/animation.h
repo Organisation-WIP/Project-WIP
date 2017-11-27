@@ -26,19 +26,23 @@ public:
     private:
         bool finished, replay, reverse, reverseState;
         clock_t startTime;
-        Model* m;
+        Model* model;
     };
 
     Animation();
     bool addAnimationBone(AnimationBone* bone);
     bool removeAnimationBone(QString boneID);
     void start(Model* model, bool replay=false, bool reverse=false);
+    void stop(Model* model);
 
     virtual void doIt() override;
 
 private:
     QList<AnimationBone*> animatedBones;
     QList<AnimatedModel*> animatedModels;
+    clock_t duration;
+
+    void updateDuration();
 };
 
 #endif // ANIMATION_H

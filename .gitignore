@@ -8,3 +8,4 @@ release*
 build*
 *.o
 *.exe
+*.blend1

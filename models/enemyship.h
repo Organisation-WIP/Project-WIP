@@ -5,7 +5,6 @@
 #include "frameworkExtension/model.h"
 #include "drawable.h"
 #include "trianglemesh.h"
-#include "transformation.h"
 
 
 class EnemyShip : public Model

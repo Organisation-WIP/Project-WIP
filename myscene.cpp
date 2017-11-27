@@ -7,6 +7,7 @@
 #include "controllablecamera.h"
 #include "color.h"
 #include "models/tower.h"
+#include "models/playership.h"
 #include "frameworkExtension/animation.h"
 #include "frameworkExtension/animationbone.h"
 #include "ui_dockwidget.h"
@@ -58,22 +59,24 @@ Node *initScene1()
     rotierer->setRotKeys(KeyboardTransformation::NoKey,KeyboardTransformation::NoKey,
                         'r', 'R',
                         KeyboardTransformation::NoKey, KeyboardTransformation::NoKey);
-    rotierer->setRotspeed(3.5f);
+    rotierer->setRotspeed(1.f);
     schieber->setTransKeys('l','j',
                           'I','K',
                           'i','k');
     schieber->setTransspeed(0.5f);
 
-    Tower* aTower = new Tower(5.0f);
+    //Tower* aTower = new Tower(5.0f);
+    PlayerShip* player = new PlayerShip();
 
     Node* rotiererNode = new Node(rotierer);
-    rotiererNode->addChild(aTower);
+    //rotiererNode->addChild(aTower);
+    rotiererNode->addChild(player);
 
     Node* schieberNode = new Node(schieber);
     schieberNode->addChild(rotiererNode);
 
     //Animation--------------------------
-    Animation* anim = new Animation();
+    /*Animation* anim = new Animation();
     AnimationBone* top = new AnimationBone("top");
     Graph* gr = new Graph();
     gr->insertKeyframe(new Keyframe(0,0, Interpolation::getSineInterpolation()));
@@ -83,7 +86,10 @@ Node *initScene1()
     top->setGraph(BONE_ROT_S, gr);
     top->setGraph(BONE_ROT_Y, axis);
     anim->addAnimationBone(top);
-    anim->start(aTower,true,true);
+    anim->start(aTower,true,true);*/
+
+    PlayerShip::landed.start(player);
+    PlayerShip::start.start(player, true, true);
 
     return schieberNode;
     //return (aTower);

@@ -1,5 +1,17 @@
 #include "animationbone.h"
 #include <QQuaternion>
+
+const int AnimationBone::TRANS_X = 0;
+const int AnimationBone::TRANS_Y = 1;
+const int AnimationBone::TRANS_Z = 2;
+const int AnimationBone::ROT_S = 3;
+const int AnimationBone::ROT_X = 4;
+const int AnimationBone::ROT_Y = 5;
+const int AnimationBone::ROT_Z = 6;
+const int AnimationBone::SCAL_X = 7;
+const int AnimationBone::SCAL_Y = 8;
+const int AnimationBone::SCAL_Z = 9;
+
 AnimationBone::AnimationBone(QString boneID)
     :boneID(boneID), duration(0)
 {
@@ -23,7 +35,6 @@ void AnimationBone::setGraph(int transformationType, Graph* graph)
         delete transformationGraphs[transformationType];
 
     transformationGraphs[transformationType] = graph;
-    updateDuration();
 }
 bool AnimationBone::deleteGraph(int transformationType)
 {
@@ -31,7 +42,6 @@ bool AnimationBone::deleteGraph(int transformationType)
     {
         delete transformationGraphs[transformationType];
         transformationGraphs[transformationType] = 0;
-        updateDuration();
         return true;
     }
     return false;
@@ -42,10 +52,20 @@ bool AnimationBone::hasGraph(int transformationType)
 }
 clock_t AnimationBone::getDuration()
 {
-    return duration;
+    int dur = 0;
+    for(int i=0;i<10;i++)
+    {
+        if(transformationGraphs[i])
+        {
+            int tempDur = transformationGraphs[i]->getDuration();
+            if(tempDur > dur)
+                dur = tempDur;
+        }
+    }
+    return dur;
 }
 
-void AnimationBone::applyAnimation(Animation::AnimatedModel* aModel)
+bool AnimationBone::applyAnimation(Animation::AnimatedModel* aModel, clock_t duration)
 {
     bool reverseState = aModel->getReverseState();
     clock_t currTime = std::clock() - aModel->getStartTime();
@@ -56,7 +76,7 @@ void AnimationBone::applyAnimation(Animation::AnimatedModel* aModel)
     if(!bone)
     {
         aModel->setFinished();
-        return;
+        return true;
     }
 
     bool finished = true;
@@ -82,21 +102,5 @@ void AnimationBone::applyAnimation(Animation::AnimatedModel* aModel)
     bone->rotate(transformation[3],transformation[4],transformation[5],transformation[6]);
     bone->scale(transformation[7],transformation[8],transformation[9]);
 
-    if(finished)
-        aModel->setFinished();
-}
-
-
-void AnimationBone::updateDuration()
-{
-    duration = 0;
-    for(int i=0;i<10;i++)
-    {
-        if(transformationGraphs[i])
-        {
-            clock_t tempDuration = transformationGraphs[i]->getDuration();
-            if(tempDuration > duration)
-                duration = tempDuration;
-        }
-    }
+    return finished;
 }
