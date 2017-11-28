@@ -13,7 +13,7 @@ const int AnimationBone::SCAL_Y = 8;
 const int AnimationBone::SCAL_Z = 9;
 
 AnimationBone::AnimationBone(QString boneID)
-    :boneID(boneID), duration(0)
+    :boneID(boneID)
 {
     for(int i=0;i<10;i++)
         transformationGraphs[i] = 0;
@@ -50,14 +50,14 @@ bool AnimationBone::hasGraph(int transformationType)
 {
     return transformationGraphs[transformationType] != 0;
 }
-clock_t AnimationBone::getDuration()
+float AnimationBone::getDuration()
 {
-    int dur = 0;
+    float dur = 0;
     for(int i=0;i<10;i++)
     {
         if(transformationGraphs[i])
         {
-            int tempDur = transformationGraphs[i]->getDuration();
+            float tempDur = transformationGraphs[i]->getDuration();
             if(tempDur > dur)
                 dur = tempDur;
         }
@@ -65,10 +65,10 @@ clock_t AnimationBone::getDuration()
     return dur;
 }
 
-bool AnimationBone::applyAnimation(Animation::AnimatedModel* aModel, clock_t duration)
+bool AnimationBone::applyAnimation(Animation::AnimatedModel* aModel, float duration)
 {
     bool reverseState = aModel->getReverseState();
-    clock_t currTime = clock() - aModel->getStartTime();
+    float currTime = (clock()/(float)CLOCKS_PER_SEC) - aModel->getStartTime();
     if(reverseState)
         currTime = duration-currTime;
 

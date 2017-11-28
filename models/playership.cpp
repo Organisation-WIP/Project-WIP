@@ -7,9 +7,9 @@ const QString PlayerShip::BONE_WSR = "wsr";
 const QString PlayerShip::BONE_WBL = "wbl";
 const QString PlayerShip::BONE_WBR = "wbr";
 const QString PlayerShip::BONE_WINDSHIELD = "windshield";
-Animation PlayerShip::landed = Animation();
-Animation PlayerShip::start = Animation();
-Animation PlayerShip::idle = Animation();
+/*landed = new Animation();
+start = new Animation();
+PlayerShip::idle = new Animation();*/
 bool PlayerShip::initialized = false;
 
 PlayerShip::PlayerShip()
@@ -96,6 +96,10 @@ PlayerShip::~PlayerShip()
 
 void PlayerShip::initAnimations()
 {
+    landed = new Animation();
+    start = new Animation();
+    idle = new Animation();
+
     /*--landed----------------------*/
     AnimationBone* bone = new AnimationBone(BONE_WINDSHIELD);
     Graph* graph = new Graph();
@@ -104,7 +108,7 @@ void PlayerShip::initAnimations()
     graph = new Graph();
     graph->insertKeyframe(new Keyframe(0,-70));
     bone->setGraph(AnimationBone::ROT_S, graph);
-    PlayerShip::landed.addAnimationBone(bone);
+    landed->addAnimationBone(bone);
 
     bone = new AnimationBone(BONE_WSL);
     graph = new Graph();
@@ -113,7 +117,7 @@ void PlayerShip::initAnimations()
     graph = new Graph();
     graph->insertKeyframe(new Keyframe(0,-105));
     bone->setGraph(AnimationBone::ROT_S, graph);
-    PlayerShip::landed.addAnimationBone(bone);
+    landed->addAnimationBone(bone);
 
     bone = new AnimationBone(BONE_WSR);
     graph = new Graph();
@@ -122,7 +126,7 @@ void PlayerShip::initAnimations()
     graph = new Graph();
     graph->insertKeyframe(new Keyframe(0,-105));
     bone->setGraph(AnimationBone::ROT_S, graph);
-    PlayerShip::landed.addAnimationBone(bone);
+    landed->addAnimationBone(bone);
 
     bone = new AnimationBone(BONE_WBL);
     graph = new Graph();
@@ -131,7 +135,7 @@ void PlayerShip::initAnimations()
     graph = new Graph();
     graph->insertKeyframe(new Keyframe(0,-25));
     bone->setGraph(AnimationBone::ROT_S, graph);
-    PlayerShip::landed.addAnimationBone(bone);
+    landed->addAnimationBone(bone);
 
     bone = new AnimationBone(BONE_WBR);
     graph = new Graph();
@@ -140,64 +144,64 @@ void PlayerShip::initAnimations()
     graph = new Graph();
     graph->insertKeyframe(new Keyframe(0,25));
     bone->setGraph(AnimationBone::ROT_S, graph);
-    PlayerShip::landed.addAnimationBone(bone);
+    landed->addAnimationBone(bone);
 
 
     /*--start----------------------*/
     bone = new AnimationBone(BONE_BASE);
     graph = new Graph();
     graph->insertKeyframe(new Keyframe(0,0,Interpolation::getSineInterpolation()));
-    graph->insertKeyframe(new Keyframe(5000,10,Interpolation::getSineInterpolation()));
+    graph->insertKeyframe(new Keyframe(5,10,Interpolation::getSineInterpolation()));
     bone->setGraph(AnimationBone::TRANS_Y, graph);
-    PlayerShip::start.addAnimationBone(bone);
+    start->addAnimationBone(bone);
 
     bone = new AnimationBone(BONE_WINDSHIELD);
     graph = new Graph();
     graph->insertKeyframe(new Keyframe(0,1));
     bone->setGraph(AnimationBone::ROT_X, graph);
     graph = new Graph();
-    graph->insertKeyframe(new Keyframe(600,-70));
-    graph->insertKeyframe(new Keyframe(2000,0,Interpolation::getSineInterpolation()));
+    graph->insertKeyframe(new Keyframe(0.6,-70));
+    graph->insertKeyframe(new Keyframe(2,0,Interpolation::getSineInterpolation()));
     bone->setGraph(AnimationBone::ROT_S, graph);
-    PlayerShip::start.addAnimationBone(bone);
+    start->addAnimationBone(bone);
 
     bone = new AnimationBone(BONE_WSL);
     graph = new Graph();
     graph->insertKeyframe(new Keyframe(0,1));
     bone->setGraph(AnimationBone::ROT_X, graph);
     graph = new Graph();
-    graph->insertKeyframe(new Keyframe(2000,-105));
-    graph->insertKeyframe(new Keyframe(4500,0));
+    graph->insertKeyframe(new Keyframe(2,-105));
+    graph->insertKeyframe(new Keyframe(4.5,0));
     bone->setGraph(AnimationBone::ROT_S, graph);
-    PlayerShip::start.addAnimationBone(bone);
+    start->addAnimationBone(bone);
 
     bone = new AnimationBone(BONE_WSR);
     graph = new Graph();
     graph->insertKeyframe(new Keyframe(0,1));
     bone->setGraph(AnimationBone::ROT_X, graph);
     graph = new Graph();
-    graph->insertKeyframe(new Keyframe(2000,-105));
-    graph->insertKeyframe(new Keyframe(4500,0));
+    graph->insertKeyframe(new Keyframe(2,-105));
+    graph->insertKeyframe(new Keyframe(4.5,0));
     bone->setGraph(AnimationBone::ROT_S, graph);
-    PlayerShip::start.addAnimationBone(bone);
+    start->addAnimationBone(bone);
 
     bone = new AnimationBone(BONE_WBL);
     graph = new Graph();
     graph->insertKeyframe(new Keyframe(0,1));
     bone->setGraph(AnimationBone::ROT_Z, graph);
     graph = new Graph();
-    graph->insertKeyframe(new Keyframe(3000,-25));
-    graph->insertKeyframe(new Keyframe(4500,0));
+    graph->insertKeyframe(new Keyframe(3,-25));
+    graph->insertKeyframe(new Keyframe(4.5,0));
     bone->setGraph(AnimationBone::ROT_S, graph);
-    PlayerShip::start.addAnimationBone(bone);
+    start->addAnimationBone(bone);
 
     bone = new AnimationBone(BONE_WBR);
     graph = new Graph();
     graph->insertKeyframe(new Keyframe(0,1));
     bone->setGraph(AnimationBone::ROT_Z, graph);
     graph = new Graph();
-    graph->insertKeyframe(new Keyframe(3000,25));
-    graph->insertKeyframe(new Keyframe(4500,0));
+    graph->insertKeyframe(new Keyframe(3,25));
+    graph->insertKeyframe(new Keyframe(4.5,0));
     bone->setGraph(AnimationBone::ROT_S, graph);
-    PlayerShip::start.addAnimationBone(bone);
+    start->addAnimationBone(bone);
 }

@@ -21,13 +21,13 @@ public:
         bool isFinished();
         bool isReplay();
         bool getReverseState();
-        clock_t getStartTime();
+        float getStartTime();
         Model* getModel();
         Observer* getObserver();
 
     private:
         bool finished, replay, reverse, reverseState;
-        clock_t startTime;
+        float startTime;
         Model* model;
         Observer* listener;
     };
@@ -37,13 +37,14 @@ public:
     bool removeAnimationBone(QString boneID);
     void start(Model* model, bool replay=false, bool reverse=false, Observer* listener=0);
     void stop(Model* model);
+    float getDuration();
 
     virtual void doIt() override;
 
 private:
     QList<AnimationBone*> animatedBones;
     QList<AnimatedModel*> animatedModels;
-    clock_t duration;
+    float duration;
 
     void updateDuration();
 };

@@ -5,13 +5,13 @@ Graph::Graph()
 {}
 Graph::~Graph()
 {
-    QMap<clock_t, Keyframe*>::iterator end = keyframes.end();
-    for(QMap<clock_t, Keyframe*>::iterator i=keyframes.begin(); i!=end; i++)
+    QMap<float, Keyframe*>::iterator end = keyframes.end();
+    for(QMap<float, Keyframe*>::iterator i=keyframes.begin(); i!=end; i++)
         delete i.value();
 }
 
 
-clock_t Graph::getDuration()
+float Graph::getDuration()
 {
     return duration;
 }
@@ -23,30 +23,30 @@ void Graph::insertKeyframe(Keyframe* keyframe)
     keyframes.insert(keyframe->getTime(), keyframe);
     updateDuration();
 }
-bool Graph::deleteKeyframe(clock_t timestamp)
+bool Graph::deleteKeyframe(float timestamp)
 {
     bool success = keyframes.remove(timestamp) > 0;
     updateDuration();
     return success;
 }
-QMap<clock_t, Keyframe*> Graph::getKeyframes()
+QMap<float, Keyframe*> Graph::getKeyframes()
 {
     return keyframes;
 }
 
-float Graph::getValue(clock_t currTime)
+float Graph::getValue(float currTime)
 {
-    QMap<clock_t, Keyframe*>::iterator end = keyframes.end();
-    for(QMap<clock_t, Keyframe*>::iterator i=keyframes.begin(); i!=end; i++)
+    QMap<float, Keyframe*>::iterator end = keyframes.end();
+    for(QMap<float, Keyframe*>::iterator i=keyframes.begin(); i!=end; i++)
     {
-        clock_t time1 = i.key();
+        float time1 = i.key();
         if(currTime <= time1)
             return i.value()->getValue();
 
-        QMap<clock_t, Keyframe*>::iterator next = i+1;
+        QMap<float, Keyframe*>::iterator next = i+1;
         if(next != end)
         {
-            clock_t time2 = next.key();
+            float time2 = next.key();
             if(currTime < time2)
                 return Interpolation::interpolate(i.value(), next.value(), ((float)currTime-time1)/(time2-time1));
             continue;
@@ -54,7 +54,7 @@ float Graph::getValue(clock_t currTime)
         return i.value()->getValue();
     }
 }
-bool Graph::isFinished(clock_t currTime)
+bool Graph::isFinished(float currTime)
 {
     return currTime >= duration;
 }

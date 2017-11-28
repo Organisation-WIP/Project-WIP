@@ -10,18 +10,18 @@ class Keyframe
 {
     friend float Interpolation::interpolate(Keyframe *k1, Keyframe *k2, float progress);
 public:
-    Keyframe(clock_t timestamp, float value, InterpolationMethod* interp=0);
+    Keyframe(float time, float value, InterpolationMethod* interp=0);
     ~Keyframe();
 
     void setInterpolation(InterpolationMethod* interp);
     void setInterpolationLeft(InterpolationMethod* interp);
     void setInterpolationRight(InterpolationMethod* interp);
 
-    clock_t getTime();
+    float getTime();
     float getValue();
 
 private:
-    clock_t timestamp;
+    float time;
     float value;
     InterpolationMethod* leftInterp;
     InterpolationMethod* rightInterp;

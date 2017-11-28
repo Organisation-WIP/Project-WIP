@@ -19,14 +19,13 @@ public:
     void setGraph(int transformationType, Graph* graph);
     bool deleteGraph(int transformationType);
     bool hasGraph(int transformationType);
-    clock_t getDuration();
+    float getDuration();
 
-    bool applyAnimation(Animation::AnimatedModel* aModel, clock_t duration);
+    bool applyAnimation(Animation::AnimatedModel* aModel, float duration);
 
 private:
     QString boneID;
     Graph* transformationGraphs[10];
-    clock_t* duration;
 };
 
 #endif // ANIMATIONBONE_H

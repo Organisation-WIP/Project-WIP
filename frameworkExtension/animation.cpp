@@ -99,13 +99,13 @@ void Animation::updateDuration()
 Animation::AnimatedModel::AnimatedModel(Model* model, bool replay, bool reverse, Observer* listener)
     :model(model), finished(false), replay(replay), reverse(reverse), reverseState(false), listener(listener)
 {
-    startTime = clock();
+    startTime = clock()/(float)CLOCKS_PER_SEC;
 }
 
 void Animation::AnimatedModel::reset()
 {
     finished = false;
-    startTime = clock();
+    startTime = clock()/(float)CLOCKS_PER_SEC;
     if(reverse)
         reverseState = !reverseState;
 }
@@ -126,7 +126,7 @@ bool Animation::AnimatedModel::getReverseState()
 {
     return reverseState;
 }
-clock_t Animation::AnimatedModel::getStartTime()
+float Animation::AnimatedModel::getStartTime()
 {
     return startTime;
 }

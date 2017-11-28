@@ -88,8 +88,8 @@ Node *initScene1()
     anim->addAnimationBone(top);
     anim->start(aTower,true,true);*/
 
-    PlayerShip::landed.start(player);
-    PlayerShip::start.start(player, true, true);
+    player->landed->start(player);
+    player->start->start(player, true, true);
 
     return schieberNode;
     //return (aTower);

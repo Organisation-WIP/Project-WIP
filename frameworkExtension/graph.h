@@ -12,17 +12,17 @@ public:
     Graph();
     ~Graph();
 
-    clock_t getDuration();
+    float getDuration();
     void insertKeyframe(Keyframe* keyframe);
-    bool deleteKeyframe(clock_t timestamp);
-    QMap<clock_t, Keyframe*> getKeyframes();
+    bool deleteKeyframe(float timestamp);
+    QMap<float, Keyframe*> getKeyframes();
 
-    float getValue(clock_t currTime);
-    bool isFinished(clock_t currTime);
+    float getValue(float currTime);
+    bool isFinished(float currTime);
 
 private:
-    QMap<clock_t, Keyframe*> keyframes;
-    clock_t duration;
+    QMap<float, Keyframe*> keyframes;
+    float duration;
 
     void updateDuration();
 };
