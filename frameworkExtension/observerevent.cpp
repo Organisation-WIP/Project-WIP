@@ -1,11 +1,11 @@
 #include "observerevent.h"
 #include "observer.h"
 
-ObserverEvent::ObserverEvent(Observer* source)
+ObserverEvent::ObserverEvent(Observee* source)
     :source(source)
 {}
 
-Observer* ObserverEvent::getSource()
+Observee* ObserverEvent::getSource()
 {
     return source;
 }

@@ -1,17 +1,17 @@
 #ifndef OBSERVEREVENT_H
 #define OBSERVEREVENT_H
 
-class Observer;
+class Observee;
 
 class ObserverEvent
 {
 public:
-    ObserverEvent(Observer* source);
+    ObserverEvent(Observee* source);
 
-    Observer* getSource();
+    Observee* getSource();
 
 private:
-    Observer* source;
+    Observee* source;
 };
 
 #endif // OBSERVEREVENT_H

@@ -73,7 +73,7 @@ void Animation::doIt()
             {
                 Observer* listener = (*i)->getObserver();
                 if(listener)
-                    listener->actionPerformed(this);
+                    listener->actionPerformed(new ObserverEvent(this));
                 animatedModels.erase(i);
             }
         }
