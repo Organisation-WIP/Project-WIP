@@ -12,4 +12,10 @@ INPUT(
 ./debug\linearinterpolation.o
 ./debug\interpolation.o
 ./debug\sineinterpolation.o
+./debug\observee.o
+./debug\observerevent.o
+./debug\tile.o
+./debug\tileplane.o
+./debug\tilewithsquare.o
+./debug\world.o
 );
