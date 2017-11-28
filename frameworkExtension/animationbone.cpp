@@ -68,7 +68,7 @@ clock_t AnimationBone::getDuration()
 bool AnimationBone::applyAnimation(Animation::AnimatedModel* aModel, clock_t duration)
 {
     bool reverseState = aModel->getReverseState();
-    clock_t currTime = std::clock() - aModel->getStartTime();
+    clock_t currTime = clock() - aModel->getStartTime();
     if(reverseState)
         currTime = duration-currTime;
 

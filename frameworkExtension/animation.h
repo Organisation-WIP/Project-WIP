@@ -5,16 +5,17 @@
 #include <qlist.h>
 #include "idleobserver.h"
 #include "model.h"
+#include "observee.h"
 
 class AnimationBone;
 
-class Animation : public IdleObserver
+class Animation : public IdleObserver, Observee
 {
 public:
     class AnimatedModel
     {
     public:
-        AnimatedModel(Model* model, bool replay=false, bool reverse=false);
+        AnimatedModel(Model* model, bool replay=false, bool reverse=false, Observer* listener=0);
         void reset();
         void setFinished();
         bool isFinished();
@@ -22,17 +23,19 @@ public:
         bool getReverseState();
         clock_t getStartTime();
         Model* getModel();
+        Observer* getObserver();
 
     private:
         bool finished, replay, reverse, reverseState;
         clock_t startTime;
         Model* model;
+        Observer* listener;
     };
 
     Animation();
     bool addAnimationBone(AnimationBone* bone);
     bool removeAnimationBone(QString boneID);
-    void start(Model* model, bool replay=false, bool reverse=false);
+    void start(Model* model, bool replay=false, bool reverse=false, Observer* listener=0);
     void stop(Model* model);
 
     virtual void doIt() override;

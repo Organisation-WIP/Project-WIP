@@ -28,7 +28,7 @@ bool Animation::removeAnimationBone(QString boneID)
     updateDuration();
     return false;
 }
-void Animation::start(Model* model, bool replay, bool reverse)
+void Animation::start(Model* model, bool replay, bool reverse, Observer* listener)
 {
     QList<Animation::AnimatedModel*>::iterator end = animatedModels.end();
     for(QList<Animation::AnimatedModel*>::iterator i = animatedModels.begin(); i!=end; i++)
@@ -38,7 +38,7 @@ void Animation::start(Model* model, bool replay, bool reverse)
             animatedModels.erase(i);
         }
     }
-    AnimatedModel* aModel = new AnimatedModel(model, replay, reverse);
+    AnimatedModel* aModel = new AnimatedModel(model, replay, reverse, listener);
     animatedModels.append(aModel);
 }
 void Animation::stop(Model *model)
@@ -70,7 +70,12 @@ void Animation::doIt()
             if((*i)->isReplay())
                 (*i)->reset();
             else
+            {
+                Observer* listener = (*i)->getObserver();
+                if(listener)
+                    listener->actionPerformed(this);
                 animatedModels.erase(i);
+            }
         }
     }
 }
@@ -91,16 +96,16 @@ void Animation::updateDuration()
 
 
 
-Animation::AnimatedModel::AnimatedModel(Model* model, bool replay, bool reverse)
-    :model(model), finished(false), replay(replay), reverse(reverse), reverseState(false)
+Animation::AnimatedModel::AnimatedModel(Model* model, bool replay, bool reverse, Observer* listener)
+    :model(model), finished(false), replay(replay), reverse(reverse), reverseState(false), listener(listener)
 {
-    startTime = std::clock();
+    startTime = clock();
 }
 
 void Animation::AnimatedModel::reset()
 {
     finished = false;
-    startTime = std::clock();
+    startTime = clock();
     if(reverse)
         reverseState = !reverseState;
 }
@@ -129,4 +134,8 @@ clock_t Animation::AnimatedModel::getStartTime()
 Model* Animation::AnimatedModel::getModel()
 {
     return model;
+}
+Observer* Animation::AnimatedModel::getObserver()
+{
+    return listener;
 }

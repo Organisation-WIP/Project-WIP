@@ -15,7 +15,9 @@ SOURCES += \
     frameworkExtension/graph.cpp \
     frameworkExtension/interpolation/linearinterpolation.cpp \
     frameworkExtension/interpolation.cpp \
-    frameworkExtension/interpolation/sineinterpolation.cpp
+    frameworkExtension/interpolation/sineinterpolation.cpp \
+    frameworkExtension/observee.cpp \
+    frameworkExtension/observerevent.cpp
 
 FORMS += \
     dockwidget.ui
@@ -33,4 +35,7 @@ HEADERS += \
     frameworkExtension/interpolation/interpolationmethod.h \
     frameworkExtension/interpolation/linearinterpolation.h \
     frameworkExtension/interpolation.h \
-    frameworkExtension/interpolation/sineinterpolation.h
+    frameworkExtension/interpolation/sineinterpolation.h \
+    frameworkExtension/observer.h \
+    frameworkExtension/observee.h \
+    frameworkExtension/observerevent.h
