@@ -11,7 +11,6 @@
 #include "frameworkExtension/animation.h"
 #include "frameworkExtension/animationbone.h"
 #include "ui_dockwidget.h"
-#include "models/world.h"
 
 Node *initScene1();
 
@@ -91,9 +90,6 @@ Node *initScene1()
 
     player->landed->start(player);
     player->start->start(player, true, true);
-
-    World* world = new World();
-    rotiererNode->addChild(world);
 
     return schieberNode;
     //return (aTower);

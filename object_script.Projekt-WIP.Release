@@ -12,10 +12,4 @@ INPUT(
 ./release\linearinterpolation.o
 ./release\interpolation.o
 ./release\sineinterpolation.o
-./release\observee.o
-./release\observerevent.o
-./release\tile.o
-./release\tileplane.o
-./release\tilewithsquare.o
-./release\world.o
 );

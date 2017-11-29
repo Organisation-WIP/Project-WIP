@@ -46,11 +46,6 @@ Tower::~Tower()
     delete m_TopTrans;
 }
 
-void Tower::setHoehe(float hoehe){
-    m_MidTrans->scale(1.0, hoehe, 1.0);
-    m_TopTrans->translate(0.0, 2.0 + hoehe, 0.0);
-}
-
 void Tower::translate(float tx, float ty, float tz)
 {
     m_BotTrans->translate(tx, ty, tz);

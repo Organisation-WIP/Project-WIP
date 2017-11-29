@@ -17,11 +17,7 @@ SOURCES += \
     frameworkExtension/interpolation.cpp \
     frameworkExtension/interpolation/sineinterpolation.cpp \
     frameworkExtension/observee.cpp \
-    frameworkExtension/observerevent.cpp \
-    models/tile.cpp \
-    models/tileplane.cpp \
-    models/tilewithsquare.cpp \
-    models/world.cpp
+    frameworkExtension/observerevent.cpp
 
 FORMS += \
     dockwidget.ui
@@ -42,8 +38,4 @@ HEADERS += \
     frameworkExtension/interpolation/sineinterpolation.h \
     frameworkExtension/observer.h \
     frameworkExtension/observee.h \
-    frameworkExtension/observerevent.h \
-    models/tile.h \
-    models/tileplane.h \
-    models/tilewithsquare.h \
-    models/world.h
+    frameworkExtension/observerevent.h
