@@ -13,11 +13,10 @@ SOURCES += \
     frameworkExtension/keyframe.cpp \
     frameworkExtension/animationbone.cpp \
     frameworkExtension/graph.cpp \
-    frameworkExtension/interpolation/linearinterpolation.cpp \
     frameworkExtension/interpolation.cpp \
-    frameworkExtension/interpolation/sineinterpolation.cpp \
     frameworkExtension/observee.cpp \
-    frameworkExtension/observerevent.cpp
+    frameworkExtension/observerevent.cpp \
+    frameworkExtension/spline.cpp
 
 FORMS += \
     dockwidget.ui
@@ -32,10 +31,8 @@ HEADERS += \
     frameworkExtension/keyframe.h \
     frameworkExtension/animationbone.h \
     frameworkExtension/graph.h \
-    frameworkExtension/interpolation/interpolationmethod.h \
-    frameworkExtension/interpolation/linearinterpolation.h \
     frameworkExtension/interpolation.h \
-    frameworkExtension/interpolation/sineinterpolation.h \
     frameworkExtension/observer.h \
     frameworkExtension/observee.h \
-    frameworkExtension/observerevent.h
+    frameworkExtension/observerevent.h \
+    frameworkExtension/spline.h

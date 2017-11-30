@@ -3,19 +3,21 @@
 
 #include <qlist.h>
 #include <time.h>
+#include <QVector2D>
 #include "interpolation.h"
+#include "spline.h"
 
 
 class Keyframe
 {
     friend float Interpolation::interpolate(Keyframe *k1, Keyframe *k2, float progress);
 public:
-    Keyframe(float time, float value, InterpolationMethod* interp=0);
+    Keyframe(float time, float value);
     ~Keyframe();
 
-    void setInterpolation(InterpolationMethod* interp);
-    void setInterpolationLeft(InterpolationMethod* interp);
-    void setInterpolationRight(InterpolationMethod* interp);
+    void setInterpolation(QVector2D pointLeft, QVector2D pointRight);
+    void setInterpolationLeft(QVector2D point);
+    void setInterpolationRight(QVector2D point);
 
     float getTime();
     float getValue();
@@ -23,8 +25,8 @@ public:
 private:
     float time;
     float value;
-    InterpolationMethod* leftInterp;
-    InterpolationMethod* rightInterp;
+    QVector2D leftInterp;
+    QVector2D rightInterp;
 };
 
 #endif // KEYFRAME_H

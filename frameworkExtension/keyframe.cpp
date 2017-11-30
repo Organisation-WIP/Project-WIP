@@ -1,36 +1,45 @@
 #include "keyframe.h"
 
 
-Keyframe::Keyframe(float time, float value, InterpolationMethod* interp)
-    :value(value)
+Keyframe::Keyframe(float time, float value)
+    :value(value), leftInterp(0.9,0.9), rightInterp(0.1,0.1)
 {
     this->time = (time<0 ? 0 : time);
-    if(!interp)
-        interp = Interpolation::getLinearInterpolation();
-    leftInterp = interp;
-    rightInterp = interp;
 }
 Keyframe::~Keyframe()
 {}
 
-void Keyframe::setInterpolation(InterpolationMethod* interp)
+void Keyframe::setInterpolation(QVector2D pointLeft, QVector2D pointRight)
 {
-    if(interp == 0)
-        interp = Interpolation::getLinearInterpolation();
-    leftInterp = interp;
-    rightInterp = interp;
+    if(pointRight.x() <= 0)
+        pointRight.setX(0.01);
+    if(pointLeft.x() >= 1)
+        pointLeft.setX(0.99);
+    if(pointRight.x() >= 0.5)
+        pointRight.setX(0.49);
+    if(pointLeft.x() <= 0.5)
+        pointLeft.setX(0.51);
+
+    leftInterp = pointLeft;
+    rightInterp = pointRight;
 }
-void Keyframe::setInterpolationLeft(InterpolationMethod* interp)
+void Keyframe::setInterpolationLeft(QVector2D point)
 {
-    if(interp == 0)
-        interp = Interpolation::getLinearInterpolation();
-    leftInterp = interp;
+    if(point.x() >= 1)
+        point.setX(0.99);
+    if(point.x() <= 0.5)
+        point.setX(0.51);
+
+    leftInterp = point;
 }
-void Keyframe::setInterpolationRight(InterpolationMethod* interp)
+void Keyframe::setInterpolationRight(QVector2D point)
 {
-    if(interp == 0)
-        interp = Interpolation::getLinearInterpolation();
-    rightInterp = interp;
+    if(point.x() <= 0)
+        point.setX(0.01);
+    if(point.x() >= 0.5)
+        point.setX(0.49);
+
+    rightInterp = point;
 }
 
 float Keyframe::getTime()

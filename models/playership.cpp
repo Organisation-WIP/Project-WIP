@@ -150,8 +150,8 @@ void PlayerShip::initAnimations()
     /*--start----------------------*/
     bone = new AnimationBone(BONE_BASE);
     graph = new Graph();
-    graph->insertKeyframe(new Keyframe(0,0,Interpolation::getSineInterpolation()));
-    graph->insertKeyframe(new Keyframe(5,10,Interpolation::getSineInterpolation()));
+    graph->insertKeyframe(new Keyframe(0,0));
+    graph->insertKeyframe(new Keyframe(5,10));
     bone->setGraph(AnimationBone::TRANS_Y, graph);
     start->addAnimationBone(bone);
 
@@ -161,7 +161,7 @@ void PlayerShip::initAnimations()
     bone->setGraph(AnimationBone::ROT_X, graph);
     graph = new Graph();
     graph->insertKeyframe(new Keyframe(0.6,-70));
-    graph->insertKeyframe(new Keyframe(2,0,Interpolation::getSineInterpolation()));
+    graph->insertKeyframe(new Keyframe(2,0));
     bone->setGraph(AnimationBone::ROT_S, graph);
     start->addAnimationBone(bone);
 
