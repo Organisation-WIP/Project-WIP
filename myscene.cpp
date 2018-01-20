@@ -40,20 +40,6 @@ void SceneManager::initScenes()
 
 Node *initScene1()
 {
-//    Objekte anlegen
-    /*Roboter* robo = new Roboter();
-    //robo->deactivateFill();
-    robo->setColorBase(0,1,0);
-    robo->setColorBody(1,0,0);
-    robo->setColorHead(1,1,0);
-    robo->setColorLeg(0,0,1);
-    robo->setColorArmLeft(0.5,0.5,1);
-    robo->setColorArmRight(0.5,0.5,1);
-    robo->setColorFingerLeft(1,0.5,0.5);
-    robo->setColorFingerRight(1,0.5,0.5);
-
-    return(robo);*/
-
     KeyboardTransformation* schieber = new KeyboardTransformation();
     KeyboardTransformation* rotierer = new KeyboardTransformation();
     rotierer->setRotKeys(KeyboardTransformation::NoKey,KeyboardTransformation::NoKey,
@@ -65,11 +51,11 @@ Node *initScene1()
                           'i','k');
     schieber->setTransspeed(0.5f);
 
-    //Tower* aTower = new Tower(5.0f);
+    Tower* aTower = new Tower(5.0f);
     PlayerShip* player = new PlayerShip();
 
     Node* rotiererNode = new Node(rotierer);
-    //rotiererNode->addChild(aTower);
+    rotiererNode->addChild(aTower);
     rotiererNode->addChild(player);
 
     Node* schieberNode = new Node(schieber);
@@ -92,6 +78,4 @@ Node *initScene1()
     player->start->start(player, true, true);
 
     return schieberNode;
-    //return (aTower);
-    //return new Node();
 }

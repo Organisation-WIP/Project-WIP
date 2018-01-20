@@ -4,22 +4,44 @@ Tower::Tower(float hoehe)
 {
     QString path(SRCDIR);
 
+    //MESH
     m_BotMesh = new TriangleMesh(path+"/Object/towerbot.obj");
     m_MidMesh = new TriangleMesh(path+"/Object/towermid.obj");
     m_TopMesh = new TriangleMesh(path+"/Object/towertop.obj");
 
+    //DRAWABLE
     m_Bot = new Drawable(m_BotMesh);
     m_Mid = new Drawable(m_MidMesh);
     m_Top = new Drawable(m_TopMesh);
 
+    //BONE
     m_BotTrans = new Bone("bot", this);
     m_MidTrans = new Bone("mid", this);
     m_TopTrans = new Bone("top", this);
 
+    //TEXTURE
+    m_BotTexture = m_Bot->getProperty<Texture>();
+    m_BotTexture->loadPicture(path + QString("/Texture/test.png"));
+
+    m_MidTexture = m_Mid->getProperty<Texture>();
+    m_MidTexture->loadPicture(path + QString("/Texture/test.png"));
+
+    m_TopTexture = m_Top->getProperty<Texture>();
+    m_TopTexture->loadPicture(path + QString("/Texture/test.png"));
+
+    //SHADER
+    m_Shader = ShaderManager::getShader(path + QString("/Shader/texture.vert"),
+                                        path + QString("/Shader/texture.frag"));
+    m_Bot->setShader(m_Shader);
+    m_Mid->setShader(m_Shader);
+    m_Top->setShader(m_Shader);
+
+    //TRANSFORMATION
     m_MidTrans->translate(0.0, 2.0, 0.0);
     m_MidTrans->scale(1.0, hoehe, 1.0);
     m_TopTrans->translate(0.0, 2.0 + hoehe, 0.0);
 
+    //SCENEGRAPH-TREE
     m_BotTrans->addChild(new Node(m_Bot));
 
     m_MidTrans->addChild(new Node(m_Mid));

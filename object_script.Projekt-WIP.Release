@@ -9,7 +9,8 @@ INPUT(
 ./release\keyframe.o
 ./release\animationbone.o
 ./release\graph.o
-./release\linearinterpolation.o
 ./release\interpolation.o
-./release\sineinterpolation.o
+./release\observee.o
+./release\observerevent.o
+./release\spline.o
 );

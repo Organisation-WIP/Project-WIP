@@ -6,6 +6,9 @@
 #include "drawable.h"
 #include "trianglemesh.h"
 #include "transformation.h"
+#include "texture.h"
+#include "shader.h"
+#include "shadermanager.h"
 
 class Tower : public Model
 {
@@ -22,6 +25,8 @@ public:
 private:
     TriangleMesh *m_BotMesh, *m_MidMesh, *m_TopMesh;
     Drawable *m_Bot, *m_Mid, *m_Top;
+    Texture *m_BotTexture, *m_MidTexture, *m_TopTexture;
+    Shader* m_Shader;
     Bone *m_BotTrans, *m_MidTrans, *m_TopTrans;
 };
 
